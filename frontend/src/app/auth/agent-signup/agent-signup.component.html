@@ -1,0 +1,59 @@
+<div class="main-body">
+  <div class="signup">
+    <span>Agent Sign Up</span>
+    <form #signup="ngForm" (ngSubmit)="signUp(signup.value)">
+      <input
+        type="text"
+        name="agentName"
+        placeholder="First Name"
+        ngModel
+        required
+        minlength="3"
+      />
+      <pre></pre>
+      <input
+        type="email"
+        name="agentEmail"
+        placeholder="Email"
+        ngModel
+        required
+        email
+      />
+      <pre></pre>
+      <input
+        type="tel"
+        name="agentMobile"
+        placeholder="Mobile"
+        ngModel
+        pattern="[0-9]{10}"
+        required
+      />
+      <pre></pre>
+      <input
+        type="number"
+        name="agentSeverity"
+        placeholder="Severity"
+        ngModel
+        pattern="[1-5]{1}"
+        required
+      />
+      <pre></pre>
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        ngModel
+        required
+        minlength="8"
+      />
+      <pre></pre>
+      <button [disabled]="!signup.valid" type="submit">Submit</button>
+    </form>
+  </div>
+  <div
+    (click)="navigateTo('signup')"
+    style="position: fixed; right: 35px; bottom: 25px; cursor: pointer"
+  >
+    <span> Sign Up portal for User </span>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div
+  class="main-body"
+  [ngStyle]="{ 'justify-content': ticketType == '' ? 'none' : 'center' }"
+>
+  <div class="options-holder">
+    <div class="option" (click)="showType('update')">
+      <span>Update Profile</span>
+    </div>
+    <div class="option" (click)="showType('disable')">
+      <span>Disable Account</span>
+    </div>
+  </div>
+  <div *ngIf="ticketType === 'update'" class="option-card">
+    <form #updateForm="ngForm" class="content">
+      <span style="align-self: center; color: red">Update Profile</span>
+      <span>Name</span>
+      <input
+        type="text"
+        name="name"
+        placeholder="New name"
+        ngModel
+        required
+        minlength="3"
+      />
+      <span>Mobile</span>
+      <input
+        type="tel"
+        name="mobile"
+        placeholder="mobile"
+        ngModel
+        pattern="[0-9]{10}"
+        required
+      />
+      <div class="reason">
+        <span>Reason</span>
+        <textarea
+          class="description"
+          type="text"
+          name="reason"
+          [placeholder]="reason"
+          ngModel
+        ></textarea>
+      </div>
+      <div
+        *ngIf="updateForm.valid"
+        class="raise-ticket"
+        (click)="rasieUpdateProfile(updateForm.value); navigateHome()"
+      >
+        <span style="margin: 5px">Raise<br />Ticket</span>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="ticketType === 'disable'" class="option-card">
+    <form #disableForm="ngForm" class="content">
+      <span style="align-self: center; color: red">Disable Account</span>
+      <span>E-Mail ID</span>
+      <input
+        type="email"
+        placeholder="E-Mail"
+        name="email"
+        ngModel
+        required
+        email
+      />
+      <div class="reason">
+        <span>Reason</span>
+        <textarea
+          class="description"
+          type="text"
+          name="reason"
+          ngModel
+          [placeholder]="reasonDisable"
+        ></textarea>
+      </div>
+      <div
+        *ngIf="disableForm.valid"
+        class="raise-ticket"
+        (click)="rasieDisable(disableForm.value); navigateHome()"
+      >
+        <span style="margin: 5px">Raise<br />Ticket</span>
+      </div>
+    </form>
+  </div>
+</div>

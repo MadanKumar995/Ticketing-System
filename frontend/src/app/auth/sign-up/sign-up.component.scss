@@ -1,0 +1,13 @@
+.main-body {
+    width: 100%;
+    height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    // background-color: #840606;
+
+    .signup {
+        display: flex;
+        flex-direction: column;
+    }
+}

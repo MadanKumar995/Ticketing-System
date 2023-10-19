@@ -1,0 +1,27 @@
+.header {
+    top: 0px;
+    height: 50px;
+    background-color: #4f4f4f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: larger;
+    user-select: none;
+    font-family: 'Gill Sans MT';
+
+    .logo {
+        padding-left: 30px;
+    }
+
+    .login {
+        color: white;
+        padding-right: 20px;
+    }
+
+    .logout {
+        color: red;
+        padding-right: 30px;
+        // background-color: aqua;
+    }
+}

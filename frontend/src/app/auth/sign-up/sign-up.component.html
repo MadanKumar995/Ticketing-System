@@ -1,0 +1,67 @@
+<div class="main-body">
+  <div class="signup">
+    <span>Sign Up</span>
+    <!-- <span>Name</span> -->
+    <!-- <span>Email</span> -->
+    <!-- <span>First Name</span> -->
+    <!-- <input type="text" placeholder="First Name" />
+    <input type="email" placeholder="Email" />
+    <input type="text" placeholder="Mobile" />
+    <input type="password" placeholder="Password" /> -->
+
+    <!-- <form [formGroup]="myForm" (submit)="onSubmit()">
+      <input type="text" formControlName="name" />
+      <select formControlName="country">
+        <option value="USA">United States</option>
+        <option value="Canada">Canada</option>
+      </select>
+      <textarea formControlName="comments"></textarea>
+    </form> -->
+    <!-- <br /> -->
+    <form #signup="ngForm" (ngSubmit)="signUp(signup.value)">
+      <input
+        type="text"
+        name="userName"
+        placeholder="First Name"
+        ngModel
+        required
+        minlength="3"
+      />
+      <pre></pre>
+      <input
+        type="email"
+        name="userEmail"
+        placeholder="Email"
+        ngModel
+        required
+        email
+      />
+      <pre></pre>
+      <input
+        type="tel"
+        name="userMobile"
+        placeholder="Mobile"
+        ngModel
+        pattern="[0-9]{10}"
+        required
+      />
+      <pre></pre>
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        ngModel
+        required
+        minlength="8"
+      />
+      <pre></pre>
+      <button [disabled]="!signup.valid" type="submit">Submit</button>
+    </form>
+  </div>
+  <div
+    (click)="navigateTo('signup/agent')"
+    style="position: fixed; right: 35px; bottom: 25px; cursor: pointer"
+  >
+    <span> Sign Up portal for Agent </span>
+  </div>
+</div>

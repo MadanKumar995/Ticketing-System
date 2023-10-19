@@ -1,0 +1,32 @@
+<div class="main-body">
+  <div class="login">
+    <span>Agent Login</span>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+      <input
+        type="email"
+        name="agentEmail"
+        placeholder="Email"
+        ngModel
+        required
+        email
+      />
+      <pre></pre>
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        ngModel
+        required
+        minlength="8"
+      />
+      <pre></pre>
+      <button [disabled]="!loginForm.valid" type="submit">Login</button>
+    </form>
+  </div>
+  <div
+    (click)="navigateTo('login')"
+    style="position: fixed; right: 35px; bottom: 25px; cursor: pointer"
+  >
+    <span> Login portal for User </span>
+  </div>
+</div>

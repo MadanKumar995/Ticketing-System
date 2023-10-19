@@ -1,0 +1,74 @@
+<div class="main-body">
+  <div
+    style="
+      border-bottom: 2px solid gray;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    "
+  >
+    <p class="heading">Tickets History</p>
+  </div>
+  <div class="card-holder" *ngIf="(allTickets$ | async)?.length !== 0">
+    <div class="scroll-cont">
+      <div class="card" *ngFor="let ticket of allTickets$ | async">
+        <div class="card-content">
+          <div class="left-side">
+            <div>
+              <span>TicketID:&nbsp;#{{ ticket.ticketId }}</span
+              ><br />
+              <div style="height: 7px"></div>
+              <span
+                >Ticket Type:&nbsp;
+                <span class="bold-text">{{ ticket.ticketType }}</span></span
+              >
+            </div>
+            <div>
+              <span>Assigned to:&nbsp;</span>
+              <span *ngIf="ticket.agentName" class="bold-text"
+                >{{ ticket.agentName }}
+              </span>
+              <span *ngIf="!ticket.agentName" class="bold-text"
+                >not yet assigned
+              </span>
+            </div>
+          </div>
+          <div class="right-side">
+            <div style="display: flex; flex-direction: column">
+              <span>Created on: {{ ticket.createdDate | dateFormat }}</span>
+              <span *ngIf="ticket.openedDate"
+                >Opened on: {{ ticket.openedDate | dateFormat }}</span
+              >
+            </div>
+            <div>
+              <div style="display: flex; justify-content: end">
+                <span class="bold-text"
+                  >Status: <span>{{ ticket.ticketStatus }}</span></span
+                >
+              </div>
+              <div *ngIf="ticket.solvedDate">
+                <div style="height: 5px"></div>
+                <span>Solved on: {{ ticket.solvedDate | dateFormat }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="(allTickets$ | async)?.length === 0"
+    style="
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <span style="font-size: 25px; color: gray; margin-top: -150px"
+      >No Tickets History</span
+    >
+  </div>
+</div>

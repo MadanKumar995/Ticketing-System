@@ -1,0 +1,215 @@
+<!-- <input type="text" [(ngModel)]="newMessage" placeholder="Type your message" /> -->
+
+<!-- <button (click)="sendMessage()">Send</button><br /> -->
+
+<!-- <button (click)="printmsgs()">print msgs</button> -->
+<div
+  style="
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <p style="font-size: 25px">Chat With Agent</p>
+</div>
+<div *ngIf="ticketId && chatStatus == 'open'" class="main-body">
+  <div class="msg-cont">
+    <div
+      class="title-not yet"
+      style="
+        height: 50px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        border-bottom: 1.3px solid black;
+      "
+    >
+      <span style="margin-left: 20px">Ticket ID: {{ ticketId }}</span>
+    </div>
+    <div style="height: calc(100% - 50px)">
+      <app-chat
+        [messages]="messages"
+        [sender]="sender"
+        (messageDataEmitter)="sendMessage($event)"
+        *ngIf="ticketId"
+      ></app-chat>
+    </div>
+
+    <!-- 
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        /* background-color: red; */
+        height: calc(100% - 90px);
+        /* margin-top: auto; */
+      "
+    >
+      <div
+        class="scroll-cont-not yet"
+        style="
+          /* background-color: red; */
+          width: 100%;
+          overflow-y: auto;
+          border-bottom: 1px solid gray;
+        "
+      >
+        <div
+          class="horizontal-not yet"
+          style="display: flex; flex-direction: column; margin: 5px 10px"
+        >
+          <div
+            style="
+              /* border: 1px solid gray; */
+              margin: 5px;
+              width: fit-content;
+              max-width: 50%;
+              border-radius: 8px;
+              display: flex;
+              flex-direction: column;
+            "
+            [ngClass]="{
+              'move-left': a.sender[0] == 'a',
+              'move-right': a.sender[0] == 'u'
+            }"
+            *ngFor="let a of messages"
+          >
+            <commentdiv style="background-color: bisque; max-width: 45%">
+            <p style="margin: 8px 10px 2px 10px; padding: 0px">
+              {{ a.message }}
+            </p>
+            <span
+              style="
+                margin: 0px 10px 5px 0px;
+                font-size: 10px;
+                align-self: flex-end;
+                opacity: 0.5;
+                color: black;
+              "
+              >{{ (a.time | dateFormat).slice(11) }}</span
+            >
+            </commentdiv>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div
+      class="type-not yet"
+      style="
+        height: 40px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0px 0px 25px 25px;
+        background-color: #d1d1d1;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 85%;
+          width: 95%;
+          border-radius: 15px;
+          /* background-color: #d1d1d1; */
+        "
+      >
+        <textarea
+          type="text"
+          style="
+            width: 85%;
+            height: 90%;
+            margin: 0px;
+            /* size: 10px; */
+            padding: 0px;
+            border: none;
+            outline: none;
+            /* overflow-y: hidden; */
+            background-color: transparent;
+          "
+          placeholder="Type a message"
+        ></textarea>
+        <button
+          style="
+            border-radius: 10px;
+            width: 60px;
+            height: 35px;
+            background-color: aqua;
+          "
+        >
+          send
+        </button>
+      </div>
+    </div> -->
+
+    <!-- <div style="background-color: aquamarine;" *ngFor="let a of messages">
+      <div style="background-color: bisque; max-width: 45%">
+        <span
+          style="
+            background-color: white;
+            border: 1.5px solid black;
+            /* margin: auto; */
+            padding: 10px;
+          "
+        >
+          {{ a.message }}
+        </span>
+      </div>
+    </div> -->
+  </div>
+</div>
+<div *ngIf="chatStatus == 'na'" class="waiting">
+  <span>Ticket ID: {{ ticketId }}</span
+  ><br /><br />
+  <span> Please Wait till Agent accepts your Request </span>
+</div>
+<div
+  *ngIf="!ticketId"
+  style="
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: calc(100vh - 150px);
+    width: 100%;
+    /* background-color: bisque; */
+  "
+>
+  <input
+    type="number"
+    style="
+      height: 40px;
+      font-size: 30px;
+      margin-top: 100px;
+      border: none;
+      border-bottom: 1px solid black;
+      outline: none;
+    "
+    [(ngModel)]="enterTicket"
+    placeholder="Enter Ticket ID"
+    required
+  />
+  <button
+    style="
+      margin-top: 30px;
+      height: 40px;
+      width: 80px;
+      border-radius: 20px;
+      border: 0.8px solid gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      cursor: pointer;
+      background-color: aquamarine;
+    "
+    (click)="getChat()"
+  >
+    chat
+  </button>
+</div>

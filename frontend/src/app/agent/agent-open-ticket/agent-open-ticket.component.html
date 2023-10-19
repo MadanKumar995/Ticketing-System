@@ -1,0 +1,173 @@
+<div *ngFor="let ticket of ticketDetails$ | async" class="main-body">
+  <span class="heading">Ticket #{{ ticket.ticketId }}</span>
+  <div *ngIf="ticket.ticketStatus == 'in-progress'">
+    <div
+      class="reject-ticket"
+      (click)="
+        changeTicketStatus(ticket.ticketStatus, ticket.remarks!, 'rejected')
+      "
+    >
+      <span>Reject Ticket</span>
+    </div>
+    <div
+      class="close-ticket"
+      (click)="
+        changeTicketStatus(ticket.ticketStatus, ticket.remarks!, 'solved')
+      "
+    >
+      <span>Mark as Solved</span>
+    </div>
+  </div>
+  <div
+    *ngIf="ticket.ticketStatus == 'open'"
+    class="close-ticket"
+    (click)="
+      changeTicketStatus(ticket.ticketStatus, ticket.remarks!, 'in-progress')
+    "
+  >
+    <span>Open Ticket</span>
+  </div>
+  <div
+    [ngClass]="{
+      'disabled-card': ticket.ticketStatus == 'open',
+      card: ticket.ticketStatus != 'open'
+    }"
+  >
+    <span style="margin: auto; text-decoration: underline">
+      {{ ticket.ticketType
+      }}<span *ngIf="ticket.ticketType == 'update'"> profile</span
+      ><span *ngIf="ticket.ticketType == 'disable'"> account</span>
+    </span>
+    <span>severity: {{ ticket.severity }}</span>
+    <div
+      style="
+        position: absolute;
+        align-self: flex-end;
+        margin: 70px 20px 0px 0px;
+      "
+    >
+      <span>Created date: {{ ticket.createdDate | dateFormat }}</span
+      ><br /><br />
+      <span *ngIf="ticket.ticketStatus != 'open'"
+        >Opened date: {{ ticket.openedDate | dateFormat }}</span
+      >
+    </div>
+    <div
+      style="
+        width: 95%;
+        height: 90%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+      "
+    >
+      <div class="field-row">
+        <span *ngIf="ticket.ticketType == 'update'"
+          >Name : {{ ticket.prevName }}</span
+        >
+        <span *ngIf="ticket.ticketType == 'disable'"
+          >Name : {{ ticket.userName }}</span
+        >
+      </div>
+
+      <div class="field-row">
+        <br />
+        <span *ngIf="ticket.ticketType == 'update'"
+          >Mobile : {{ ticket.prevMobile }}</span
+        >
+        <span *ngIf="ticket.ticketType == 'disable'"
+          >Mobile : {{ ticket.userMobile }}</span
+        >
+      </div>
+      <div class="field-row">
+        <br />
+        <span>Email : {{ ticket.userEmail }}</span>
+      </div>
+      <div *ngIf="ticket.ticketType == 'update'" class="field-row">
+        <br />
+        <span>Requested Name : {{ ticket.reqName }}</span>
+        &nbsp;
+        <span
+          style="color: coral; text-decoration: underline; cursor: pointer"
+          (click)="
+            updateName(
+              ticket.userId!,
+              ticket.prevName!,
+              ticket.userName!,
+              ticket.reqName!,
+              ticket.userMobile!
+            )
+          "
+          ><span *ngIf="ticket.userName != ticket.reqName">update</span
+          ><span *ngIf="ticket.userName === ticket.reqName">revert</span
+          >&nbsp;name</span
+        >
+        <div *ngIf="ticket.userName === ticket.reqName">
+          <span style="color: blue">Name Updated!</span>
+        </div>
+      </div>
+      <div *ngIf="ticket.ticketType == 'update'" class="field-row">
+        <br />
+        <span>Requested Mobile : {{ ticket.reqMobile }}</span>
+        &nbsp;
+        <span
+          style="color: coral; text-decoration: underline; cursor: pointer"
+          (click)="
+            updateMobile(
+              ticket.userId!,
+              ticket.prevMobile!,
+              ticket.userMobile!,
+              ticket.reqMobile!,
+              ticket.userName!
+            )
+          "
+          ><span *ngIf="ticket.userMobile != ticket.reqMobile">update</span
+          ><span *ngIf="ticket.userMobile === ticket.reqMobile">revert</span
+          >&nbsp;mobile</span
+        >
+        <div *ngIf="ticket.userMobile === ticket.reqMobile">
+          <span style="color: blue">mobile no. Updated!</span>
+        </div>
+      </div>
+      <div *ngIf="ticket.ticketType == 'disable'" class="field-row">
+        <br />
+        <span>User Typed Email : {{ ticket.reqEmail }}</span>
+        &nbsp;
+        <span
+          *ngIf="ticket.accountStatus == 'active'"
+          style="color: coral; text-decoration: underline; cursor: pointer"
+          (click)="changeUserAccStatus('disable', ticket.userId!)"
+          >Disable account</span
+        >
+        <span
+          *ngIf="ticket.accountStatus == 'disable'"
+          style="color: blue; text-decoration: underline; cursor: pointer"
+          (click)="changeUserAccStatus('active', ticket.userId!)"
+          >Activate account</span
+        >
+        <div *ngIf="ticket.accountStatus == 'disable'">
+          <span style="color: red">Account Disabled!</span>
+        </div>
+      </div>
+      <br />
+      <div class="reason">
+        <span>Reason&nbsp;:&nbsp;</span>
+        <div>
+          <span>{{ ticket.reason }}</span>
+        </div>
+      </div>
+      <br />
+      <div style="height: 150px; justify-self: flex-end">
+        <span>Remarks :&nbsp;</span>
+        <div style="width: 100%">
+          <textarea
+            name="remarks"
+            placeholder="remarks if any"
+            style="width: 100%; height: 100px; border-radius: 5px"
+            >{{ ticket.remarks }}</textarea
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

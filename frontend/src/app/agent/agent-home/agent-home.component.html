@@ -1,0 +1,35 @@
+<div class="main-body">
+  <div class="switch-container">
+    <span
+      style="margin-right: 10px"
+      [ngStyle]="{ color: agentStatus == 'on-duty' ? 'darkgreen' : 'red' }"
+      >{{ agentStatus }}</span
+    >
+    <div>
+      <div
+        class="switch"
+        [class.on]="agentStatus == 'on-duty'"
+        (click)="changeAgentStatus()"
+      >
+        <div
+          class="ball"
+          [ngClass]="{
+            'ball-red': agentStatus == 'off-duty',
+            'ball-green': agentStatus == 'on-duty'
+          }"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="change-status">status</div> -->
+  <div class="func-container" (click)="navigateTo('agent/tickets')">
+    <p>Tickets</p>
+  </div>
+  <div class="func-container" (click)="navigateTo('agent/tickets-history')">
+    <p>Tickets</p>
+    <p>History</p>
+  </div>
+  <div class="func-container" (click)="navigateTo('agent/chats')">
+    <p>Chats</p>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="main-body">
+  <!-- <div class="change-status">status</div> -->
+  <span class="heading">Solved Tickets</span>
+  <div class="card-holder">
+    <div class="scroll-cont">
+      <div *ngFor="let ticket of agentTicketsHistory$ | async" class="card">
+        <div class="card-content">
+          <div class="left-side">
+            <div>
+              <span>TicketID:&nbsp;#{{ ticket.ticketId }}</span
+              ><br />
+              <div style="height: 7px"></div>
+              <span
+                >Ticket Type:&nbsp;
+                <span class="bold-text">{{ ticket.ticketType }}</span></span
+              >
+            </div>
+            <div>
+              <span>Raised by:&nbsp;</span>
+              <span class="bold-text">{{ ticket.userName }} </span>
+            </div>
+          </div>
+          <div
+            style="display: flex; flex-direction: column; align-items: center"
+          >
+            <span>Severity</span
+            ><span class="bold-text">{{ ticket.severity }}</span>
+          </div>
+          <div class="right-side">
+            <span
+              >Created on: {{ ticket.createdDate!.slice(0, 10) }}
+              {{ ticket.createdDate!.slice(11, 16) }}</span
+            >
+            <span
+              >Opened on: {{ ticket.openedDate!.slice(0, 10) }}
+              {{ ticket.openedDate!.slice(11, 16) }}</span
+            >
+            <div>
+              <div style="display: flex; justify-content: end">
+                <span class="bold-text"
+                  >Status: <span>{{ ticket.ticketStatus }}</span></span
+                >
+              </div>
+              <div>
+                <div style="height: 5px"></div>
+                <span
+                  >Solved on: {{ ticket.solvedDate!.slice(0, 10) }}
+                  {{ ticket.solvedDate!.slice(11, 16) }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+.main-body {
+    width: 100%;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    font-family: 'Gill Sans MT';
+
+    .field-row {
+        &:first-child {
+            margin-top: 15px;
+        }
+    }
+
+    .card {
+        margin: auto;
+        width: 70%;
+        min-height: 80%;
+        border: 2px solid gray;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #e9e9e9;
+
+
+    }
+
+    .bold-text {
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    .heading {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 50px;
+    }
+
+    .reason {
+        display: flex;
+        // max-height: 100px;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: gray;
+        }
+    }
+
+    .disabled-card {
+        pointer-events: none;
+        opacity: 0.5;
+        cursor: not-allowed;
+        margin: auto;
+        width: 70%;
+        min-height: 80%;
+        border: 2px solid gray;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #e9e9e9;
+    }
+
+    .close-ticket,
+    .reject-ticket {
+        position: fixed;
+        // background-color: cyan;
+        width: 140px;
+        height: 50px;
+        border: 2px solid gray;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    .close-ticket {
+        bottom: 30px;
+        right: 40px;
+        color: green;
+
+        &:hover {
+            background-color: lightblue;
+        }
+    }
+
+    .reject-ticket {
+        bottom: 100px;
+        right: 40px;
+        color: rgb(130, 0, 0);
+
+        &:hover {
+            background-color: lightcoral;
+        }
+    }
+}

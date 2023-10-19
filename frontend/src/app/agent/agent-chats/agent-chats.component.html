@@ -1,0 +1,100 @@
+<!-- <p>chats works!</p>
+<input type="text" [(ngModel)]="ticketId" placeholder="ticket id" />
+<button (click)="getMessages()">Send</button><br />
+<br />
+<button (click)="sent()">click</button>
+
+<div *ngFor="let a of messages">{{ a.message }}</div> -->
+<div class="header">
+  <div class="header-chats">Chats</div>
+  <div (click)="toggleReq()" class="header-requests">
+    Requests
+    <div *ngIf="reqChats" class="req-notify">{{ reqChats.length }}</div>
+  </div>
+</div>
+
+<div *ngIf="showReqContainer" class="requests-cont">
+  <div class="req-header">
+    <span class="req-heading">New Chat Requests</span>
+  </div>
+  <div class="req-scroll">
+    <div *ngFor="let chat of reqChats" class="req-row">
+      <div class="req-row-first-cont">
+        <div class="fields">
+          <p>TicketID&nbsp;</p>
+          <p>Ticket Status&nbsp;</p>
+          <p>Opened on&nbsp;</p>
+          <p>User Name&nbsp;</p>
+        </div>
+        <div class="answs">
+          <p>: {{ chat.ticketId }}</p>
+          <p>: {{ chat.ticketStatus }}</p>
+          <p>: {{ chat.createdDate | dateFormat }}</p>
+          <p>: {{ chat.userName }}</p>
+        </div>
+      </div>
+      <div class="req-row-severity">
+        <p>Severity</p>
+        <p>{{ chat.severity }}</p>
+      </div>
+      <div
+        class="req-row-accept"
+        (click)="acceptChat(chat.ticketId, chat.agentSeverity, chat.severity)"
+      >
+        Accept
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="true" class="main-body">
+  <div class="users">
+    <div class="head"><span class="head-content">Chats</span></div>
+    <div [ngClass]="{ 'users-body': true, 'no-chats': false }">
+      <p *ngIf="false">No Chats Now</p>
+      <div *ngIf="true" class="user-cont">
+        <div
+          (click)="getMessages(user.ticketId, user.userId, user.userName)"
+          class="user"
+          *ngFor="let user of agentChats"
+        >
+          <div class="avatar">
+            <span class="avatar-letter">
+              {{ user.userName[0].toUpperCase() }}
+            </span>
+          </div>
+          <div class="user-card">
+            <span> {{ user.userName.toUpperCase() }} </span>
+            <div class="msg">
+              <span *ngIf="user.sender != 'na'" class="last-msg">{{
+                user.message
+              }}</span>
+              <span *ngIf="user.sender != 'na'" class="last-time">{{
+                (user.time | dateFormat).slice(11)
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-msgs">
+    <div class="head">
+      <span class="head-content"
+        >{{ receiverName }}&nbsp;&nbsp;Ticket ID: {{ ticketId }}</span
+      >
+    </div>
+    <div class="chat-body">
+      <div *ngIf="!messages" class="pls-select">
+        <span>Please Select a Chat</span>
+      </div>
+      <app-chat
+        *ngIf="messages"
+        class="chat-body"
+        (messageDataEmitter)="sendMessage($event)"
+        [sender]="sender"
+        [messages]="messages"
+      ></app-chat>
+    </div>
+  </div>
+</div>

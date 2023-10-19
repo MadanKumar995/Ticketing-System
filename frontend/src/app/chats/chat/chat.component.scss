@@ -1,0 +1,26 @@
+.move-left {
+    align-self: flex-start;
+    background-color: gray;
+}
+
+.move-right {
+    align-self: flex-end;
+    background-color: #d1d1d1;
+}
+
+.scroll-cont {
+
+    // background-color: red;
+    width: 100%;
+    overflow-y: auto;
+    border-bottom: 1px solid gray;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: gray;
+    }
+}

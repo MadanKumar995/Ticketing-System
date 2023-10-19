@@ -1,0 +1,10 @@
+<div class="header">
+  <span class="logo">Ticketing System</span>
+  <span *ngIf="!name" class="login" (click)="navigateTo()">{{ page }}</span>
+  <div class="logout" *ngIf="name">
+    <span class="login" (click)="navigateTo()"
+      >Welcome&nbsp;&nbsp;{{ name }}</span
+    >
+    <span (click)="logout()">Logout</span>
+  </div>
+</div>
