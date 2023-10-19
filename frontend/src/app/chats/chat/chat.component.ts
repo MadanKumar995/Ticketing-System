@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+
 
 @Component({
   selector: 'app-chat',
@@ -11,6 +13,9 @@ export class ChatComponent {
   @Input() sender!: string;
   @Output() messageDataEmitter = new EventEmitter<string>();
 
+  @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
+
+
   message: string = '';
 
   sendToParent() {
@@ -19,6 +24,15 @@ export class ChatComponent {
       this.messageDataEmitter.emit(this.message);
     }
     this.message = '';
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    const container = this.scrollContainer.nativeElement;
+    container.scrollTop = container.scrollHeight;
   }
 
 }

@@ -23,7 +23,7 @@ module.exports = class Ticket {
         return db.execute(query);
     }
 
-    static createTicket(userId, ticketType, severity, reqName, reqMobile, reason, reqEmail, agentId) {
+    static createTicket(userId, ticketType, severity, reqName, reqMobile, reason, reqEmail, agentId, name, mobile) {
         let query;
         if (reqEmail) {
             query = `
@@ -33,10 +33,10 @@ module.exports = class Ticket {
             return db.execute(query, [userId, agentId, ticketType, severity, reqEmail, reason]);
         } else {
             query = `
-                INSERT INTO tickets (userId, agentId, ticketType, severity, reqName, reqMobile, reason)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO tickets (userId, agentId, ticketType, severity, reqName, reqMobile, reason, prevName, prevMobile)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
-            return db.execute(query, [userId, agentId, ticketType, severity, reqName, reqMobile, reason]);
+            return db.execute(query, [userId, agentId, ticketType, severity, reqName, reqMobile, reason, name, mobile]);
         }
 
     }

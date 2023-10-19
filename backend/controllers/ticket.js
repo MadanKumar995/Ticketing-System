@@ -13,7 +13,9 @@ exports.createTicketCont = async (req, res, next) => {
         }
 
         const createTicketResponse = await Ticket.createTicket
-            (req.userDetails.userId, req.body.ticketType, req.body.severity, req.body.reqName, req.body.reqMobile, req.body.reason, req.body.reqEmail, agentId);
+            (req.userDetails.userId, req.body.ticketType, req.body.severity,
+                req.body.reqName, req.body.reqMobile, req.body.reason, req.body.reqEmail, agentId,
+                req.userDetails.userName, req.userDetails.userMobile);
         res.status(201).json(createTicketResponse);
     } catch (err) {
         if (!err.statusCode) {

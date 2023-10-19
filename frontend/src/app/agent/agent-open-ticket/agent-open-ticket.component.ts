@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, tap } from 'rxjs';
 import { TicketAndUserAgent } from 'src/app/models/ticketAndUserAgent';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
@@ -25,6 +25,7 @@ export class AgentOpenTicketComponent {
   constructor(
     private route: ActivatedRoute,
     private ticketService: TicketsService,
+    private router: Router,
     private errorHandlerService: ErrorHandlerService,
   ) {
     this.ticketId = parseInt(this.route.snapshot.paramMap.get('ticketId') || '0', 10);
@@ -42,7 +43,8 @@ export class AgentOpenTicketComponent {
     } else if (status == 'in-progress') {
       this.ticketService.updateTicketStatus({ status: setStatus, remarks: remarks, ticketId: this.ticketId }).pipe(
         tap(() => {
-          this.ticketDetails$ = this.ticketService.getAgentTicket(this.ticketId)
+          // this.ticketDetails$ = this.ticketService.getAgentTicket(this.ticketId)
+          this.router.navigate(['agent/home']);
         })
 
       ).subscribe();
